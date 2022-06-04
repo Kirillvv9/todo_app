@@ -6,5 +6,6 @@ urlpatterns = [
     path('notes/', views.NoteListCreateAPIView.as_view()),
     path('notes/<int:pk>', views.NoteDetailAPIView.as_view()),
     path('notes/public/', views.PublicNoteListAPIView.as_view()),
+    path('about/', views.AboutAPIView.as_view()),
 
 ]

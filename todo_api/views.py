@@ -5,6 +5,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 
+from django.views import View
+from todo_api.settings_local import SERVER_VERSION
+from django.shortcuts import render
 
 from . models import Note
 from . import serializers, filters
@@ -103,3 +106,15 @@ class PublicNoteListAPIView(ListAPIView):
         return filters.note_filter_by_status(queryset,
             status_id=self.request.query_params.get("nt_status", None),
             )
+
+class AboutAPIView(View):
+    def get(self, request):
+        context = {
+            "server_version": SERVER_VERSION,
+            "user_name": request.user.username
+
+        }
+        return render(
+            request,
+            "todo_api/about.html",
+            context=context)
